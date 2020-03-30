@@ -2,7 +2,7 @@ import 'package:disenios/src/Retos/cuadrado_animado_page.dart';
 import 'package:disenios/src/pages/animaciones_page.dart';
 import 'package:disenios/src/pages/graficas_circulares_page.dart';
 import 'package:disenios/src/pages/headers_page.dart';
-import 'package:disenios/src/pages/slideshow_page.dart';
+import 'package:disenios/src/pages/pinterest_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Diseños flutter',
       debugShowCheckedModeBanner: false,
       
-      home: SlideShowPage()
+      home: PinterestPage()
     );
   }
 }
