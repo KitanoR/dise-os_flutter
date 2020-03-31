@@ -1,5 +1,6 @@
 import 'package:disenios/src/Retos/cuadrado_animado_page.dart';
 import 'package:disenios/src/pages/animaciones_page.dart';
+import 'package:disenios/src/pages/emergency_page.dart';
 import 'package:disenios/src/pages/graficas_circulares_page.dart';
 import 'package:disenios/src/pages/headers_page.dart';
 import 'package:disenios/src/pages/pinterest_page.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Diseños flutter',
       debugShowCheckedModeBanner: false,
       
-      home: PinterestPage()
+      home: EmergencyPage()
     );
   }
 }
