@@ -1,23 +1,26 @@
-import 'package:disenios/src/Retos/cuadrado_animado_page.dart';
-import 'package:disenios/src/pages/animaciones_page.dart';
-import 'package:disenios/src/pages/emergency_page.dart';
-import 'package:disenios/src/pages/graficas_circulares_page.dart';
-import 'package:disenios/src/pages/headers_page.dart';
-import 'package:disenios/src/pages/pinterest_page.dart';
-import 'package:disenios/src/pages/sliver_page.dart';
-import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'package:disenios/src/pages/launcher_page.dart';
+import 'package:disenios/src/theme/theme.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+void main() => runApp(
+  ChangeNotifierProvider(
+    create: (_) => ThemeChanger(2),
+  child: MyApp()
+  ));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return MaterialApp(
+      theme: appTheme.currentTheme,
       title: 'Diseños flutter',
       debugShowCheckedModeBanner: false,
-      
-      home: SliverPage()
+      home: LauncherPage()
     );
   }
 }
@@ -63,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.

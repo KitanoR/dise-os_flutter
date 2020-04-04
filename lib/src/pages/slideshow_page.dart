@@ -1,7 +1,10 @@
+import 'package:disenios/src/theme/theme.dart';
 import 'package:disenios/src/widgets/slideshow.dart';
 import 'package:flutter/material.dart';
 //TODO Borrar
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
 
 class SlideShowPage extends StatelessWidget {
   @override
@@ -27,9 +30,11 @@ class MiSlideShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final accentColor = appTheme.currentTheme.accentColor;
     return SlideShow(
       puntosArriba: false,
-      colorPrimario: Colors.pink,
+      colorPrimario: (appTheme.darkTheme)? accentColor : Colors.pink,
       bulletPrimario: 15,
       slides: <Widget>[
         SvgPicture.asset('assets/svg/slide-1.svg'),
