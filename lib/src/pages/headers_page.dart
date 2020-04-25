@@ -9,7 +9,7 @@ class HeaderPage extends StatelessWidget {
       final accentColor = Provider.of<ThemeChanger>(context).currentTheme.accentColor;
 
     return Scaffold(
-      body: HeaderWave(color: accentColor,)
+      body: HeaderWaveGradient()
     );
   }
 }
