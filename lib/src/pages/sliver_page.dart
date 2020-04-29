@@ -222,8 +222,15 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
       begin: EdgeInsets.only(bottom: 70, left: 30),
       end: EdgeInsets.only(left: 0.0, top: 30.0));
   final _avatarAlignTween =
-      AlignmentTween(begin: Alignment.bottomLeft, end: Alignment.topCenter);
-
+      AlignmentTween(begin: Alignment.centerRight, end: Alignment.topRight);
+  final _nameAlingTween = AlignmentTween(
+    begin: Alignment.bottomLeft,
+    end: Alignment.topLeft
+  );
+  final _sizeFontTween = Tween(
+    begin: 30.0,
+    end: 12.0
+  );
   final Widget avatar;
   final Widget title;
   final double extent;
@@ -241,7 +248,8 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
     print("Objechjkf === ${progress} ${shrinkOffset}");
     final avatarMargin = _avatarMarginTween.lerp(progress);
     final avatarAlign = _avatarAlignTween.lerp(progress);
-
+    final nameAlign = _nameAlingTween.lerp(progress);
+    final sizeFontName = _sizeFontTween.lerp(progress);
     return Stack(
       children: <Widget>[
         AnimatedContainer(
@@ -254,14 +262,28 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
           padding: avatarMargin,
           child: Align(
             alignment: avatarAlign,
-              child: avatar
+              child: Container(
+                height: 20,
+                width: 20,
+                color: Colors.yellow,
+              )
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: EdgeInsets.only(bottom: 10, left: 20),
           child: Align(
-            alignment: Alignment.bottomCenter,
-            child: title,
+            alignment: Alignment.bottomLeft,
+            child: Text('Hola!'),
+          ),
+        ),
+        Padding(
+          padding: avatarMargin,
+          child: Align(
+            alignment: nameAlign,
+            child: Text(
+              'Cayetano',
+              style: TextStyle(fontSize: sizeFontName),
+            ),
           ),
         )
       ],
