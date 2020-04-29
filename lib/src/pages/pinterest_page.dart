@@ -64,8 +64,14 @@ class _PinterestGridState extends State<PinterestGrid> {
   double scrollAnterior = 0;
   @override
   void initState() {
-    controller.addListener(() {
-      if(controller.offset > scrollAnterior && controller.offset > 150){
+        super.initState();
+
+
+
+    controller..addListener(() =>_scrollListener(context));
+  }
+  _scrollListener(BuildContext context) {
+     if(controller.offset > scrollAnterior && controller.offset > 150){
         print('ocultar menu');
         Provider.of<_MenuModel>(context, listen: false).mostrar = false;
       }else {
@@ -74,8 +80,14 @@ class _PinterestGridState extends State<PinterestGrid> {
 
       }
       scrollAnterior = controller.offset;
-    });
-    super.initState();
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+     
+    }
+    if (controller.offset <= controller.position.minScrollExtent &&
+        !controller.position.outOfRange) {
+      
+    }
   }
   @override
   void dispose() {
