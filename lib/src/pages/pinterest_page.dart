@@ -1,5 +1,6 @@
 import 'package:disenios/src/theme/theme.dart';
 import 'package:disenios/src/widgets/pinterest_menu.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -59,30 +60,31 @@ class PinterestGrid extends StatefulWidget {
 }
 
 class _PinterestGridState extends State<PinterestGrid> {
-  final List<int> items = List.generate(200, (i) => i);
+   List<int> items = List.generate(10, (i) => i);
   ScrollController controller = new ScrollController();
   double scrollAnterior = 0;
   @override
   void initState() {
-        super.initState();
-
-
-
+      super.initState();
     controller..addListener(() =>_scrollListener(context));
+  }
+  getItems() {
+    print('Get items');
+    items.addAll(List.generate(10, (i)=> i));
+    setState(() {
+      
+    });
   }
   _scrollListener(BuildContext context) {
      if(controller.offset > scrollAnterior && controller.offset > 150){
-        print('ocultar menu');
         Provider.of<_MenuModel>(context, listen: false).mostrar = false;
       }else {
-        print('Mostrar menu');
         Provider.of<_MenuModel>(context, listen: false).mostrar = true;
-
       }
       scrollAnterior = controller.offset;
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
-     
+          getItems();
     }
     if (controller.offset <= controller.position.minScrollExtent &&
         !controller.position.outOfRange) {
@@ -96,16 +98,38 @@ class _PinterestGridState extends State<PinterestGrid> {
   }
   @override
   Widget build(BuildContext context) {
-    return new StaggeredGridView.countBuilder(
-        controller: controller,
-        crossAxisCount: 4,
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) => _PinterestItem(index),
-        staggeredTileBuilder: (int index) =>
-            new StaggeredTile.count(2, index.isEven ? 2 : 3),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
-      );
+    return ListView.builder(
+      controller: controller,
+      itemCount: items.length + 1,
+      itemBuilder: (BuildContext context, int index){
+          if(index == items.length){
+            return Container(
+              height: 150,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          return Container(
+            height: 150,
+            child: _PinterestItem(index));
+        }
+    );
+    // return new StaggeredGridView.countBuilder(
+    //     controller: controller,
+    //     crossAxisCount: 4,
+    //     itemCount: items.length + 1,
+    //     itemBuilder: (BuildContext context, int index){
+    //       if(index == items.length){
+    //         return CircularProgressIndicator();
+    //       }
+    //       return _PinterestItem(index);
+    //     },
+    //     staggeredTileBuilder: (int index) =>
+    //         new StaggeredTile.count(2, index.isEven ? 2 : 3),
+    //     mainAxisSpacing: 4.0,
+    //     crossAxisSpacing: 4.0,
+    //   );
   }
 }
 
